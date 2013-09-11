@@ -7,6 +7,7 @@ using namespace std;
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Analysis/CallGraph.h"
 #include "llvm/Analysis/Dominators.h"
+#include "llvm/Analysis/LoopInfo.h"
 #include "llvm/IR/Instructions.h"
 #include "llvm/IR/IntrinsicInst.h"
 #include "llvm/IR/Module.h"
@@ -50,8 +51,13 @@ namespace {
 			int maxLoopCountPerFunction;
 			int totalLoopCount;
 
+			//Dominator Count
 			double totalAvgDominatorCount;
 			double totalAvgDominatedCount;
+
+			//BasicBlock inside loop count
+			int maxBBlocksInsideLoop;
+			int minBBlocksInsideLoop;
 
 		public:
 			static char ID;
@@ -63,6 +69,8 @@ namespace {
 		       
 			void loopCountPerFunction (Function *,DominatorTree *dt);
 			void result();
+                        void countBasicBlockInsideLoop (LoopInfo *lp,Function* func);
+
 
 	};
 
@@ -88,6 +96,9 @@ namespace {
 		totalAvgDominatedCount = 0.0;
 		totalAvgDominatorCount = 0.0;
 
+		minBBlocksInsideLoop = 0;
+		maxBBlocksInsideLoop = 0;
+
 		initializeBasicCallGraphPass(*PassRegistry::getPassRegistry());
 	}
 
@@ -112,6 +123,7 @@ namespace {
 				totalAvgDominatedCount += avgDominatedCount;
 				loopCountPerFunction(func,&DT);
 				LoopInfo &lp = getAnalysis<LoopInfo>(*func);
+				countBasicBlockInsideLoop(&lp, func);
 			}
 
 
@@ -133,6 +145,24 @@ namespace {
 		result();
 		return false;
 	}		
+
+	void MyCallGraphPass::countBasicBlockInsideLoop( LoopInfo *li, Function* func ) {
+		int bBlocksInsideLoop = 0;
+		for(Function::iterator bBlock = func->begin() ; bBlock != func->end() ; ++bBlock) {
+			Loop *loop = li->getLoopFor(bBlock);
+			if(loop){
+				bBlocksInsideLoop++;
+			}
+		}
+		
+		if( bBlocksInsideLoop > maxBBlocksInsideLoop) {
+			maxBBlocksInsideLoop = bBlocksInsideLoop;
+		}
+		if(bBlocksInsideLoop < minBBlocksInsideLoop) {
+			minBBlocksInsideLoop = bBlocksInsideLoop;
+		}
+	}
+
 
 	void MyCallGraphPass::addToCallGraph(Function *f) {
 		CallGraphNode *node = getOrInsertFunction(f);
@@ -259,6 +289,7 @@ namespace {
 	
 	void MyCallGraphPass::getAnalysisUsage ( AnalysisUsage &au) const{
 		au.addRequired<DominatorTree>();
+		au.addRequired<LoopInfo>();
 	} 
 
 	void MyCallGraphPass::result() {
@@ -272,6 +303,8 @@ namespace {
 		errs()<<"Min Loop Count per function "<<minLoopCountPerFunction<<"\n";
 		errs()<<"Total avg dominator count " <<totalAvgDominatorCount<<"\n";
 		errs()<<"Total avg dominated count "<<totalAvgDominatedCount<<"\n";
+		errs()<<"Max number of Basic Blocks inside a loop "<<maxBBlocksInsideLoop<<"\n";
+		errs()<<"Min number of Basic Blocks inside a loop "<<minBBlocksInsideLoop<<"\n";
 	}
 
 
