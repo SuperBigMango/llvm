@@ -65,7 +65,7 @@ namespace {
 			~MyCallGraphPass();
 			virtual bool runOnModule(Module &m);
 			virtual void getAnalysisUsage ( AnalysisUsage &au)const;
-		       // virtual void destroy();
+		        virtual void destroy();
 		       
 			void loopCountPerFunction (Function *,DominatorTree *dt);
 			void result();
@@ -104,7 +104,7 @@ namespace {
 
 
 	MyCallGraphPass::~MyCallGraphPass() {
-	       // destroy();
+	        destroy();
 	}
 
 	bool MyCallGraphPass::runOnModule(Module &m) {
@@ -176,6 +176,8 @@ namespace {
 			}
 		}
 
+		
+
 		if(f->hasAddressTaken()) {
 			errs().write_escaped(f->getName());
 			externalCallingNode->addCalledFunction(CallSite(),node);
@@ -183,7 +185,7 @@ namespace {
 
 		if(f->isDeclaration() && !f->isIntrinsic()) {
 			node->addCalledFunction(CallSite(),callsExternalNode);
-		}
+		} 
 
 		int edgeCountPerFunction = 0;
 
@@ -198,7 +200,7 @@ namespace {
 						node->addCalledFunction(cs,callsExternalNode);    
 					} else if(!callee->isIntrinsic()) {
 						node->addCalledFunction(cs,getOrInsertFunction(callee));
-					}
+					} 
 				}
 
 			}
@@ -278,13 +280,13 @@ namespace {
 		*avgDominatorCount = dominatorCount/basicBlockCount;
 	}
 
-       /* void MyCallGraphPass::destroy() {
+        void MyCallGraphPass::destroy() {
 		if(callsExternalNode) {
 			callsExternalNode->allReferencesDropped();
 			//delete callsExternalNode;
 		}
-	        CallGraph::destroy();
-	}*/
+	        //CallGraph::destroy();
+	}
 
 	
 	void MyCallGraphPass::getAnalysisUsage ( AnalysisUsage &au) const{
