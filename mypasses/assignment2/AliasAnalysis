@@ -1,0 +1,160 @@
+
+
+#include "llvm/Pass.h"
+#include "llvm/Function.h"
+#include "llvm/BasicBlock.h"
+#include "llvm/Support/raw_ostream.h"
+#include "llvm/Support/GetElementPtrTypeIterator.h"
+#include "llvm/Analysis/Trace.h"
+#include "llvm/Analysis/ConstantsScanner.h"
+#include "llvm/Instructions.h"
+#include "llvm/Constants.h"
+#include "llvm/LLVMContext.h"
+#include "llvm/Support/IRBuilder.h"
+#include "llvm/ExecutionEngine/ExecutionEngine.h"
+#include "llvm/ExecutionEngine/GenericValue.h"
+#include "llvm/Bitcode/ReaderWriter.h"
+#include "llvm/Analysis/Dominators.h"
+#include "llvm/Analysis/ConstantFolding.h"
+#include "llvm/Analysis/AliasAnalysis.h"
+#include "llvm/Transforms/Utils/BasicBlockUtils.h"
+
+using namespace llvm;
+
+#include <vector>
+#include <string>
+#include <unistd.h>
+#include <fcntl.h>
+#include <typeinfo>
+using namespace std;
+
+
+
+
+
+namespace {
+	vector<BasicBlock*> basicBlockVector;
+	class Assignment2 :public FunctionPass {
+
+		public :
+
+			static char ID ;
+			Assignment2():FunctionPass(ID){}
+
+			virtual bool runOnFunction(Function &func) ;
+			virtual void getAnalysisUsage(AnalysisUsage &au) const ;
+
+
+			//Helper Methods
+			void showAllInstructions(BasicBlock *bBlock) ;
+			void doAnalysis(Instruction *testInstruction,Function& func);
+
+
+	};
+    //Helper methods
+	void Assignment2::showAllInstructions(BasicBlock *bBlock) {
+		errs()<<"Curren Basic Block " <<bBlock->getName()<<"\n";
+		for(BasicBlock::iterator inst = bBlock->begin() ; inst!= bBlock->end(); ++inst) {
+			errs()<<"Instruction : "<<*inst<<"\n";
+		}
+
+		errs()<<"\n***********************\n";
+	}
+
+	void Assignment2::doAnalysis(Instruction *testInstruction,Function& func) {//The flag is 0 for load and 1 to{
+
+		AliasAnalysis& Analysis = getAnalysis<AliasAnalysis>();
+		AliasAnalysis::Location testLocation;
+
+		if(isa<StoreInst>(testInstruction)) 	{
+			testLocation =Analysis.getLocation(cast<StoreInst>(testInstruction));
+		}else {
+			testLocation = Analysis.getLocation(cast<LoadInst>(testInstruction));
+		}
+
+		AliasAnalysis::AliasResult result;
+
+		for(Function::iterator bBlock = func.begin(); bBlock != func.end(); ++bBlock) {
+			for(BasicBlock::iterator inst = bBlock->begin(); inst != bBlock->end(); ++inst) {
+//				errs()<<*inst<<"\n";
+				if((isa<StoreInst>(inst) || isa<LoadInst>(inst))){// && (typeid(*inst)  == typeid(*testInstruction))){
+					if(testInstruction == inst ) {
+						break;
+					}
+				
+					AliasAnalysis::Location instLocation ;
+					if(isa<StoreInst> (inst) )  {
+					       instLocation = Analysis.getLocation(cast<StoreInst>(inst));
+					}else if (isa<LoadInst>(inst)) {
+						instLocation = Analysis.getLocation(cast<LoadInst>(inst));
+					}
+					result = Analysis.alias(instLocation,testLocation);
+
+					switch(result) {
+					
+						case 0:
+							break;
+
+						case 1:
+							errs()<<"May be alias\n";
+							errs()<<*inst<<"\n";
+							errs()<<*testInstruction<<"\n";
+							break;
+
+						case 2:
+						       errs()<<"Partial Alias\n";
+							errs()<<*inst<<"\n";
+							errs()<<*testInstruction<<"\n";
+							break;
+						
+
+						case 3:
+							errs()<<"Must be Alias\n";
+							errs()<<*inst<<"\n";
+							errs()<<*testInstruction<<"\n";
+							break;
+
+					}
+				}
+			}
+		}
+	}
+
+	//Main Working functions
+
+	void Assignment2:: getAnalysisUsage(AnalysisUsage &au) const{
+		au.addRequiredTransitive<AliasAnalysis>();
+		au.addPreserved<AliasAnalysis>();
+	}
+
+	bool Assignment2::runOnFunction(Function &func) {
+		for(Function::iterator bblock = func.begin(); bblock != func.end(); ++bblock) {
+			for(BasicBlock::iterator inst = bblock->begin() ; inst != bblock->end(); ++inst) {
+				//errs()<<*inst<<"\n";
+				if(isa<LoadInst> (inst) ){
+					doAnalysis(inst,func);
+				}else if(isa<StoreInst>( inst) ){
+					doAnalysis(inst,func);
+				}else if(isa<VAArgInst> (inst)) {
+				}else if(isa<AtomicCmpXchgInst>( inst)) {
+				}else if(isa<AtomicRMWInst> (inst)) {
+				}
+				/*else if (isa<GetElementPtrInst>(inst)){
+					errs()<<"This is a get element pointer instruction\n";
+					GetElementPtrInst *gepInst = cast<GetElementPtrInst>(inst);
+					Value *ptrData = gepInst->getPointerOperand();
+
+				}else {
+					errs()<<"Unknown type of instruction\n";
+				}*/
+
+			}
+		}
+
+		return false;
+	}
+
+} 
+
+char Assignment2::ID = 0;
+static RegisterPass<Assignment2> X("arijit","This is a test pass",false,false);

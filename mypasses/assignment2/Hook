@@ -1,0 +1,91 @@
+
+
+#include "llvm/Pass.h"
+#include "llvm/Function.h"
+#include "llvm/BasicBlock.h"
+#include "llvm/Support/raw_ostream.h"
+#include "llvm/Support/GetElementPtrTypeIterator.h"
+#include "llvm/Analysis/Trace.h"
+#include "llvm/Analysis/ConstantsScanner.h"
+#include "llvm/Instructions.h"
+#include "llvm/Constants.h"
+#include "llvm/LLVMContext.h"
+#include "llvm/Support/IRBuilder.h"
+#include "llvm/ExecutionEngine/ExecutionEngine.h"
+#include "llvm/ExecutionEngine/GenericValue.h"
+#include "llvm/Bitcode/ReaderWriter.h"
+
+using namespace llvm;
+
+#include <vector>
+#include <string>
+#include <unistd.h>
+#include <fcntl.h>
+using namespace std;
+
+
+
+#include "llvm/Pass.h"
+#include "llvm/Function.h"
+#include "llvm/Module.h"
+#include "llvm/BasicBlock.h"
+#include "llvm/CallGraphSCCPass.h"
+#include "llvm/ADT/SCCIterator.h"
+#include "llvm/Analysis/CallGraph.h"
+#include "llvm/Analysis/Dominators.h"
+#include "llvm/Analysis/LoopInfo.h"
+#include "llvm/Support/CFG.h"
+#include "llvm/ADT/StringExtras.h"
+//#include "llvm/Support/Streams.h"
+#include "llvm/ADT/Statistic.h"
+#include "llvm/Support/raw_ostream.h"
+#include "llvm/ADT/Statistic.h"
+#include "llvm/Support/InstIterator.h"
+#include "llvm/InstrTypes.h"
+#include "llvm/Support/GetElementPtrTypeIterator.h"
+#include "llvm/Transforms/Utils/BasicBlockUtils.h"
+#include <set>
+#include <vector>
+
+using namespace llvm;
+
+
+namespace {
+	vector<BasicBlock*> basicBlockVector;
+	struct Assignment2 :public FunctionPass {
+		Trace *t;
+		static char ID ;
+		Assignment2():FunctionPass(ID){}
+
+		void showAllInstructions(BasicBlock *bBlock) {
+			errs()<<"Curren Basic Block " <<bBlock->getName()<<"\n";
+			for(BasicBlock::iterator inst = bBlock->begin() ; inst!= bBlock->end(); ++inst) {
+				errs()<<"Instruction : "<<*inst<<"\n";
+			}
+
+			errs()<<"\n***********************\n";
+		}
+
+
+		virtual bool runOnFunction(Function &func) {
+			for(Function::iterator block = func.begin(); block != func.end() ; ++block) {
+				//    for(BasicBlock::iterator inst = block ->begin() ; inst != block->end() ; ++inst) {
+				//
+				errs()<<"Name of the function : "<<func.getName()<<"\n";\
+					if(func.getName() == "main"){
+						Module* module = func.getParent();
+						Constant* hook = module->getOrInsertFunction("print",Type::getVoidTy(module->getContext()),(Type*)0) ;
+						Function *hookFunction = cast<Function>(hook);
+						TerminatorInst* term = block->getTerminator();
+						Instruction* callInst = CallInst::Create(hookFunction ,"");
+						block->getInstList().insert(term,callInst);
+					}
+				//  }
+			}
+			return true;
+		}
+	};
+} 
+
+char Assignment2::ID = 0;
+static RegisterPass<Assignment2> X("arijit","This is a test pass",false,false);
