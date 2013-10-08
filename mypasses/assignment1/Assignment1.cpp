@@ -7,7 +7,7 @@ using namespace std;
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Analysis/CallGraph.h"
 #include "llvm/Analysis/Dominators.h"
-#include "llvm/IR/Instructions.h"
+#include "llvm/Instructions.h"
 #include "llvm/IR/IntrinsicInst.h"
 #include "llvm/IR/Module.h"
 #include "llvm/Support/CallSite.h"
