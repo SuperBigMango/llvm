@@ -10,10 +10,6 @@
 #include "llvm/Instructions.h"
 #include "llvm/Constants.h"
 #include "llvm/LLVMContext.h"
-#include "llvm/Support/IRBuilder.h"
-#include "llvm/ExecutionEngine/ExecutionEngine.h"
-#include "llvm/ExecutionEngine/GenericValue.h"
-#include "llvm/Bitcode/ReaderWriter.h"
 
 using namespace llvm;
 
@@ -35,17 +31,12 @@ using namespace std;
 #include "llvm/Analysis/Dominators.h"
 #include "llvm/Analysis/LoopInfo.h"
 #include "llvm/Support/CFG.h"
-#include "llvm/ADT/StringExtras.h"
-//#include "llvm/Support/Streams.h"
 #include "llvm/ADT/Statistic.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/ADT/Statistic.h"
 #include "llvm/Support/InstIterator.h"
 #include "llvm/InstrTypes.h"
 #include "llvm/Support/GetElementPtrTypeIterator.h"
-#include "llvm/Transforms/Utils/BasicBlockUtils.h"
-#include <set>
-#include <vector>
 
 using namespace llvm;
 
@@ -66,15 +57,6 @@ namespace {
 			errs()<<"\n***********************\n";
 		}
 
-		void insertFunction(Function& func) {
-		      /*  Module *module = func.getParent();
-			Constant *c =  module->getOrInsertFunction("test",NULL);
-			Function *f = cast<Function>(c);
-			f->setCallingConv(CallingConv::C);
-			BasicBlock* block = BasicBlock::Create(getGlobalContext(),"entry",f);
-			IRBuilder<> builder(block);
-			*/
-		}
 
 
 
@@ -85,6 +67,8 @@ namespace {
 						Instruction *inst = &*I;
 						GetElementPtrInst* ptrInstr = cast<GetElementPtrInst>(inst);
 						int NumElements = 0 ;
+						Module *module = func.getParent();
+
 						gep_type_iterator ptrInstrItr = gep_type_begin(ptrInstr);
 						while(ptrInstrItr != gep_type_end(ptrInstr)) {
 							if(const ArrayType *array = dyn_cast<ArrayType>(*ptrInstrItr))	{
@@ -92,68 +76,28 @@ namespace {
 							}
 							++ptrInstrItr;
 						}
-
+						
 
 						Value *value = ptrInstr->getOperand(2);
 						
 						if(value==NULL || NumElements==0)
 							continue;
 
-						const IntegerType *intType = IntegerType::get(func.getContext(), 64);
-						Constant *cons = ConstantInt::get(const_cast<IntegerType*>(intType), NumElements);
-						Value *upperbound = cast<Value>(cons);
+                                                ConstantInt* upperBound = ConstantInt::get(module->getContext(),APInt(64,NumElements)) ;
 
-						BasicBlock *currBlock = inst->getParent();
+						Constant* hook = module->getOrInsertFunction("compare",
+								Type::getVoidTy(module->getContext()),IntegerType::get(module->getContext(),64),
+								IntegerType::get(module->getContext(),64),
+								NULL) ;
 
-						ICmpInst *cmpinst = new ICmpInst(inst, ICmpInst::ICMP_SLT, value, upperbound);
-						BasicBlock *newBlock = currBlock->splitBasicBlock(inst, "bounds");
-						TerminatorInst *termInst = currBlock->getTerminator();
-						termInst->eraseFromParent();
-
-
-						Twine t2("endBlock");
-						BasicBlock *endBlock = BasicBlock::Create(func.getContext(),t2,&func);
-						const IntegerType *intType2 = IntegerType::get(func.getContext(), 32);
-						Constant *retVal2 = ConstantInt::get(const_cast<IntegerType*>(intType2),0);
-						ReturnInst *retInst2 = ReturnInst::Create(func.getContext(),cast<Value>(retVal2));
-						endBlock->getInstList().push_back(retInst2);
-						BranchInst* finalJmp = BranchInst::Create(endBlock);
-
-						// BranchInst* finalJmp = builder.CreateBr(endBlock);
-						/** 
-						 * Attach a terminator instructions
-						 const IntegerType *intType1 = IntegerType::get(func.getContext(), 32);
-						 Constant *retVal = ConstantInt::get(const_cast<IntegerType*>(intType1),0);
-						 ReturnInst *retInst = ReturnInst::Create(func.getContext(),cast<Value>(retVal));
-						 currBlock->getInstList().push_back(retInst);
-						 */
-						//  showAllInstructions(currBlock);
-
-						Twine t("elseblock");
-						BasicBlock *elseBlock = BasicBlock::Create(func.getContext(),t,&func);
-						Module *module = func.getParent();
-						Constant* hook = module->getOrInsertFunction("print",Type::getVoidTy(module->getContext()),(Type*)0) ;
 						Function* hookFunction = cast<Function>(hook);
-						Instruction *callInst = CallInst::Create(hookFunction, "");
-						elseBlock->getInstList().push_back(callInst);
-						elseBlock->getInstList().push_back(finalJmp);
-
-						/*
-						const IntegerType *intType1 = IntegerType::get(func.getContext(), 32);
-						Constant *retVal = ConstantInt::get(const_cast<IntegerType*>(intType1),1);
-						ReturnInst *retInst = ReturnInst::Create(func.getContext(),cast<Value>(retVal));
-						elseBlock->getInstList().push_back(retInst);
-						// showAllInstructions(elseBlock);
-						*/
-
-						IRBuilder<> builder(elseBlock);
-						BranchInst *branchInst = BranchInst::Create(newBlock, elseBlock,cmpinst);
-						currBlock->getInstList().push_back(branchInst);
+						vector<Value*> argList;
+						argList.push_back(value);
+						argList.push_back(upperBound);
+						Instruction *callInst = CallInst::Create(hookFunction,argList);
+						callInst->insertAfter(inst);
 						 
-						showAllInstructions(currBlock);
-						showAllInstructions(newBlock);
-						showAllInstructions(elseBlock);
-						break;
+						//break;
 					}
 				}
 			}

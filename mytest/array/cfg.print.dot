@@ -1,0 +1,5 @@
+digraph "CFG for 'print' function" {
+	label="CFG for 'print' function";
+
+	Node0xc23220 [shape=record,label="{entry:\l  %first.addr = alloca i64, align 8\l  %sec.addr = alloca i64, align 8\l  store i64 %first, i64* %first.addr, align 8\l  store i64 %sec, i64* %sec.addr, align 8\l  %0 = load i64* %first.addr, align 8\l  %1 = load i64* %sec.addr, align 8\l  %call = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([51 x i8]* @.str, i32 0, i32 0), i64 %0, i64 %1)\l  ret void\l}"];
+}
