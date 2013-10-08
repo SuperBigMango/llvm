@@ -96,8 +96,6 @@ namespace {
 						argList.push_back(upperBound);
 						Instruction *callInst = CallInst::Create(hookFunction,argList);
 						callInst->insertAfter(inst);
-						 
-						//break;
 					}
 				}
 			}
