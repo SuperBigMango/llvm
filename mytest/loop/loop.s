@@ -25,11 +25,14 @@ for.body:                                         ; preds = %for.cond
   %2 = load i32* %y, align 4
   %add = add nsw i32 %1, %2
   store i32 %add, i32* %z, align 4
+  %3 = load i32* %i, align 4
+  %add1 = add nsw i32 %3, 10
+  store i32 %add1, i32* %i, align 4
   br label %for.inc
 
 for.inc:                                          ; preds = %for.body
-  %3 = load i32* %i, align 4
-  %inc = add nsw i32 %3, 1
+  %4 = load i32* %i, align 4
+  %inc = add nsw i32 %4, 1
   store i32 %inc, i32* %i, align 4
   br label %for.cond
 

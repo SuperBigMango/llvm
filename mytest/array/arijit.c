@@ -5,7 +5,7 @@
 int globalArray[MAX];
 
 int main() {
-	int i = 2000 ;
+	int i = 2 ;
 	globalArray[i] = 230;
 	return 0;
 }

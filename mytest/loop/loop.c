@@ -9,6 +9,7 @@ int main() {
 
 	for(i = 0 ; i < 100; i++) {
 		z= x+y;
+		i=i+10;
 	}
 	return 0;
 }
