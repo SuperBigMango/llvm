@@ -1,0 +1,228 @@
+[-------------------------------g721encide.bc-----------------------]
+
+Function count : 26
+
+Call Graph Edge Count : 82
+
+Max BasicBlocks : 103
+Min BasicBlocks : 1
+Avg BasicBlocks per function : 1.326923e+01
+
+Max CFG Edge Count per Function 137
+Min CFG Edge Count per Function 0
+Avg CFG Edge Count per Function 1.680769e+01
+
+Max Loop Count per function 3
+Min Loop Count per function 0
+Avg Loop Count per function 3.846154e-01
+
+Max number of Basic Blocks inside a loop 18
+Min number of Basic Blocks inside a loop 0
+Avg number of Basic Blocks inside a loop Per function 1.038462e+00
+
+Total avg dominator count  of a basic block : 2.909461e+00
+
+Total avg dominated basic block count by a basic block :   2.909461e+00
+
+ Unreachable Code Blocks 0
+
+ -----------------------------------------------------------------------------------------------------
+
+[------------------ jpeg-6a.bc----------------------]
+
+
+
+Function count : 391
+
+Call Graph Edge Count : 1371
+
+Max BasicBlocks : 135
+Min BasicBlocks : 1
+Avg BasicBlocks per function : 1.436317e+01
+
+Max CFG Edge Count per Function 192
+Min CFG Edge Count per Function 0
+Avg CFG Edge Count per Function 1.883376e+01
+
+Max Loop Count per function 21
+Min Loop Count per function 0
+Avg Loop Count per function 1.230179e+00
+
+Max number of Basic Blocks inside a loop 111
+Min number of Basic Blocks inside a loop 0
+Avg number of Basic Blocks inside a loop Per function 3.721884e+00
+
+Total avg dominator count  of a basic block : 3.702381e+00
+
+Total avg dominated basic block count by a basic block :   3.702381e+00
+
+ Unreachable Code Blocks 3
+-----------------------------------------------------------------------------------------------------
+
+[--------------------------- mpeg2dec.bc------------------------------]
+
+Function count : 115
+
+Call Graph Edge Count : 661
+
+Max BasicBlocks : 89
+Min BasicBlocks : 1
+Avg BasicBlocks per function : 1.770435e+01
+
+Max CFG Edge Count per Function 126
+Min CFG Edge Count per Function 0
+Avg CFG Edge Count per Function 2.320000e+01
+
+Max Loop Count per function 16
+Min Loop Count per function 0
+Avg Loop Count per function 1.000000e+00
+
+Max number of Basic Blocks inside a loop 71
+Min number of Basic Blocks inside a loop 0
+Avg number of Basic Blocks inside a loop Per function 4.658696e+00
+
+Total avg dominator count  of a basic block : 3.658931e+00
+
+Total avg dominated basic block count by a basic block :   3.658931e+00
+
+ Unreachable Code Blocks 1
+
+ ----------------------------------------------------------------------------------
+
+
+[----------------------RAWCAUDIO-----------------------------]
+
+
+
+
+Function count : 3
+
+Call Graph Edge Count : 7
+
+Max BasicBlocks : 30
+Min BasicBlocks : 8
+Avg BasicBlocks per function : 2.133333e+01
+
+Max CFG Edge Count per Function 41
+Min CFG Edge Count per Function 0
+Avg CFG Edge Count per Function 2.766667e+01
+
+Max Loop Count per function 1
+Min Loop Count per function 1
+Avg Loop Count per function 1.000000e+00
+
+Max number of Basic Blocks inside a loop 26
+Min number of Basic Blocks inside a loop 3
+Avg number of Basic Blocks inside a loop Per function 1.766667e+01
+
+Total avg dominator count  of a basic block : 6.163675e+00
+
+Total avg dominated basic block count by a basic block :   6.163675e+00
+
+ Unreachable Code Blocks 1
+
+
+ --------------------------------------------------------------------------------
+
+[------------------------------- RAWDAUDIO--------------------------]
+
+
+
+
+
+Function count : 3
+
+Call Graph Edge Count : 7
+
+Max BasicBlocks : 30
+Min BasicBlocks : 8
+Avg BasicBlocks per function : 2.133333e+01
+
+Max CFG Edge Count per Function 41
+Min CFG Edge Count per Function 0
+Avg CFG Edge Count per Function 2.766667e+01
+
+Max Loop Count per function 1
+Min Loop Count per function 1
+Avg Loop Count per function 1.000000e+00
+
+Max number of Basic Blocks inside a loop 26
+Min number of Basic Blocks inside a loop 3
+Avg number of Basic Blocks inside a loop Per function 1.766667e+01
+
+Total avg dominator count  of a basic block : 6.163675e+00
+
+Total avg dominated basic block count by a basic block :   6.163675e+00
+
+ Unreachable Code Blocks 1
+----------------------------------------------------------------------------------
+
+[--------------------------TOAST---------------------------]
+
+
+
+
+WARNING: You're attempting to print out a bitcode file.
+This is inadvisable as it may cause display problems. If
+you REALLY want to taste LLVM bitcode first-hand, you
+can force output with the `-f' option.
+
+Function count : 94
+
+Call Graph Edge Count : 448
+
+Max BasicBlocks : 97
+Min BasicBlocks : 1
+Avg BasicBlocks per function : 1.475532e+01
+
+Max CFG Edge Count per Function 128
+Min CFG Edge Count per Function 0
+Avg CFG Edge Count per Function 1.803191e+01
+
+Max Loop Count per function 11
+Min Loop Count per function 0
+Avg Loop Count per function 1.106383e+00
+
+Max number of Basic Blocks inside a loop 45
+Min number of Basic Blocks inside a loop 0
+Avg number of Basic Blocks inside a loop Per function 2.161648e+00
+
+Total avg dominator count  of a basic block : 3.998974e+00
+
+Total avg dominated basic block count by a basic block :   3.998974e+00
+
+ Unreachable Code Blocks 42
+
+opt: Unknown command line argument '-ass1'.  Try: 'opt -help'
+opt: Did you mean '-asan'?
+WARNING: You're attempting to print out a bitcode file.
+This is inadvisable as it may cause display problems. If
+you REALLY want to taste LLVM bitcode first-hand, you
+can force output with the `-f' option.
+
+Function count : 94
+
+Call Graph Edge Count : 448
+
+Max BasicBlocks : 97
+Min BasicBlocks : 1
+Avg BasicBlocks per function : 1.475532e+01
+
+Max CFG Edge Count per Function 128
+Min CFG Edge Count per Function 0
+Avg CFG Edge Count per Function 1.803191e+01
+
+Max Loop Count per function 11
+Min Loop Count per function 0
+Avg Loop Count per function 1.106383e+00
+
+Max number of Basic Blocks inside a loop 45
+Min number of Basic Blocks inside a loop 0
+Avg number of Basic Blocks inside a loop Per function 2.161648e+00
+
+Total avg dominator count  of a basic block : 3.998974e+00
+
+Total avg dominated basic block count by a basic block :   3.998974e+00
+
+ Unreachable Code Blocks 42
+
