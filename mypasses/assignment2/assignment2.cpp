@@ -89,9 +89,6 @@ namespace {
 					if(value==NULL || NumElements==0)
 						continue;
 
-					if(value->getType() != IntegerType::get(module->getContext(),64)) {
-						continue;
-					}
 
 					ConstantInt* upperBound = ConstantInt::get(module->getContext(),APInt(64,NumElements)) ;
 
