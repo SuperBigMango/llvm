@@ -61,46 +61,53 @@ namespace {
 
 
 		virtual bool runOnFunction(Function &func) {
-			if(func.getName()=="main") {
-				for(inst_iterator I = inst_begin(func), E = inst_end(func); I != E ; ++I) {
-					if(isa<GetElementPtrInst>(*I)) {
-						Instruction *inst = &*I;
-						GetElementPtrInst* ptrInstr = cast<GetElementPtrInst>(inst);
-						int NumElements = 0 ;
-						Module *module = func.getParent();
+		      if(func.getName() != "compare") {
+			for(inst_iterator I = inst_begin(func), E = inst_end(func); I != E ; ++I) {
+				if(isa<GetElementPtrInst>(*I)) {
+					Instruction *inst = &*I;
+					GetElementPtrInst* ptrInstr = cast<GetElementPtrInst>(inst);
+					int NumElements = 0 ;
+					Module *module = func.getParent();
 
-						gep_type_iterator ptrInstrItr = gep_type_begin(ptrInstr);
-						while(ptrInstrItr != gep_type_end(ptrInstr)) {
-							if(const ArrayType *array = dyn_cast<ArrayType>(*ptrInstrItr))	{
-								NumElements = array->getNumElements();
-							}
-							++ptrInstrItr;
+					gep_type_iterator ptrInstrItr = gep_type_begin(ptrInstr);
+					while(ptrInstrItr != gep_type_end(ptrInstr)) {
+						if(const ArrayType *array = dyn_cast<ArrayType>(*ptrInstrItr))	{
+							NumElements = array->getNumElements();
 						}
-						
-
-						Value *value = ptrInstr->getOperand(2);
-						
-						if(value==NULL || NumElements==0)
-							continue;
-
-                                                ConstantInt* upperBound = ConstantInt::get(module->getContext(),APInt(64,NumElements)) ;
-
-						Constant* hook = module->getOrInsertFunction("compare",
-								Type::getVoidTy(module->getContext()),IntegerType::get(module->getContext(),64),
-								IntegerType::get(module->getContext(),64),
-								NULL) ;
-
-						Function* hookFunction = cast<Function>(hook);
-						vector<Value*> argList;
-						argList.push_back(value);
-						argList.push_back(upperBound);
-						Instruction *callInst = CallInst::Create(hookFunction,argList);
-						callInst->insertAfter(inst);
-						 
-						//break;
+						++ptrInstrItr;
 					}
+
+
+					Value *value;
+					if(ptrInstr->getNumIndices() >= 2) {
+						value  = ptrInstr->getOperand(2);
+					}else if(ptrInstr->getNumIndices() == 1){
+						value = ptrInstr->getOperand(1);
+						continue;
+					}
+
+					if(value==NULL || NumElements==0)
+						continue;
+                                        if(value->getType() != IntegerType::get(module->getContext(),64)) {
+						continue;
+					}
+
+					ConstantInt* upperBound = ConstantInt::get(module->getContext(),APInt(64,NumElements)) ;
+
+					Constant* hook = module->getOrInsertFunction("compare",
+							Type::getVoidTy(module->getContext()),IntegerType::get(module->getContext(),64),
+							IntegerType::get(module->getContext(),64),
+							NULL) ;
+
+					Function* hookFunction = cast<Function>(hook);
+					vector<Value*> argList;
+					argList.push_back(value);
+					argList.push_back(upperBound);
+					Instruction *callInst = CallInst::Create(hookFunction,argList);
+					callInst->insertBefore(inst);
 				}
 			}
+		}
 			return true;
 		}
 	};
