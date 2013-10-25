@@ -8,6 +8,9 @@
 #include "llvm/Support/raw_ostream.h"
 using namespace llvm;
 
+#include <vector>
+using namespace std;
+
 namespace {
 
 	class IRModification:public FunctionPass {
@@ -22,17 +25,19 @@ namespace {
 	bool IRModification::runOnFunction(Function& func) {
 		errs()<<"Function name is  "<<func.getName()<<"\n";
 	        Module* module = func.getParent();
-	        Constant* hook = module->getOrInsertFunction("hook",
-	        			Type::getVoidTy(module->getContext()),
-	        			Type::getVoidTy(module->getContext()),
-	        			NULL
-	        		);
+		vector<Value*> arglist;
+                Constant* hook = module->getOrInsertFunction("hook",
+                			Type::getVoidTy(module->getContext()),
+                			NULL,
+                			NULL
+                		);
+
                 Function* hookFunction = cast<Function>(hook);
-                Instruction* hookInstruction = CallInst::Create(hookFunction);
-                for(BasicBlock *bBlock = func.begin(); bBlock != func.end() ; ++bBlock) {
-	        	Instruction* termInst = bBlock->getTerminator();
-	        	hookInstruction->insertBefore(termInst);
-                }
+                Instruction* hookInstruction = CallInst::Create(hookFunction,arglist);
+             //   for(BasicBlock *bBlock = func.begin(); bBlock != func.end() ; ++bBlock) {
+	     //   	Instruction* termInst = bBlock->getTerminator();
+	     //   	hookInstruction->insertBefore(termInst);
+             //   }
 		return true;
 	}
 
