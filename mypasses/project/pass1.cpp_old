@@ -6,7 +6,6 @@
 #include "llvm/Constants.h"
 #include "llvm/Instructions.h"
 #include "llvm/Support/raw_ostream.h"
-#include "llvm/ADT/APInt.h"
 using namespace llvm;
 
 #include <vector>
@@ -28,15 +27,6 @@ namespace {
 
 	bool IRModification::runOnFunction(Function& func) {
 
-		APInt integer(64,123);
-		Constant* data = ConstantInt::get(func.getParent()->getContext(),integer);
-		vector<Constant*> vec;
-		vec.push_back(data);
-		ArrayRef<Constant*> arr(vec);
-		GetElementPtrInst* inst = GetElementPtrInst::Create(data,arr,"myowninstr");
-		return false;
-
-		/*
 		errs()<<"Function name is  "<<func.getName()<<"\n";
 		for(Function::iterator bBlock = func.begin() ; bBlock != func.end() ; ++bBlock) {
 			errs() <<bBlock->getName() <<"\n";
@@ -65,7 +55,6 @@ namespace {
 	         	hookInstruction->insertBefore(termInst);
 	         }
 		return true;
-		*/
 	}
 }
 
