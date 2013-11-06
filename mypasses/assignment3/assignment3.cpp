@@ -1,4 +1,5 @@
 #include "llvm/Pass.h"
+#include "llvm/Module.h"
 #include "llvm/Function.h"
 #include "llvm/Constants.h"
 #include "llvm/Instructions.h"
@@ -38,6 +39,7 @@ namespace {
 	}
 
 	bool Ass3::runOnFunction(Function &func) {
+		Module *module = func.getParent();
 		for(inst_iterator I = inst_begin(func), E = inst_end(func); I != E ; ++I ) {
 			if(isa<CallInst>(*I)){
 				Instruction *inst = &*I;
@@ -50,20 +52,34 @@ namespace {
 					if(targetFunction->getName() == "malloc") {
 						ConstantInt*size = dyn_cast<ConstantInt>(callInst->getArgOperand(0));
 						errs()<<"Size  is " <<*(size->getValue().getRawData())<<"\n";
-					}else if(targetFunction->getName() == "free") {
-					 	if(isa<LoadInst>(callInst->getArgOperand(0))) {
-							LoadInst *ldInst = cast<LoadInst>(callInst->getOperand(0));
-							errs()<<"This is load instruciton "<<ldInst->getPointerAddressSpace()<<"\n";
+						
+						Constant* mallocHook = module->getOrInsertFunction("malloc_hook",
+								Type::getVoidTy(module->getContext()),
+								IntegerType::get(module->getContext(),64),
+								NULL) ;
 
-						}       
+						Function* mallocHookFunction = cast<Function>(mallocHook);
+						vector<Value*> argList;
+						argList.push_back(static_cast<Value*>(size));
+						Instruction *callInst = CallInst::Create(mallocHookFunction,argList);
+						callInst->insertAfter(inst);
+					}else if(targetFunction->getName() == "free") {
+						Constant* freeHook = module->getOrInsertFunction("free_hook",
+								Type::getVoidTy(module->getContext()),
+								IntegerType::get(module->getContext(),64),
+								NULL) ;
+
+						Function* mallocHookFunction = cast<Function>(mallocHook);
+						vector<Value*> argList;
+						argList.push_back(static_cast<Value*>(size));
+						Instruction *callInst = CallInst::Create(mallocHookFunction,argList);
+						callInst->insertAfter(inst);
 					}
 			        }
 				errs()<<"\n\n\n";
-				
-
 			}
 		}
-		return false;
+		return true;
 	}
 }
 
