@@ -64,7 +64,12 @@ namespace {
 						Instruction *callInst = CallInst::Create(mallocHookFunction,argList);
 						callInst->insertAfter(inst);
 					}else if(targetFunction->getName() == "free") {
+						errs()<<"Number of operands "<<callInst->getNumOperands()<<"\n";
+						errs()<<"Sec : "<<*(callInst->getArgOperand(1))<<"\n";
 						Value *op = callInst->getArgOperand(0);
+						//LoadInst *ldInst = static_cast<LoadInst*>(callInst->getArgOperand(0));
+						//errs()<<"Load inst  " <<*(ldInst->getPointerOperand())<<"\n";
+				                // op  = ldInst->getPointerOperand();
 						//Constant* freeHook = module->getOrInsertFunction("free_hook",
 						//		Type::getVoidTy(module->getContext()),
 						//		IntegerType::get(module->getContext(),64),
@@ -76,10 +81,12 @@ namespace {
 
 					        Function* freeHookFunction = cast<Function>(freeHook);
 					        vector<Value*> freeArgList;
-					        freeArgList.push_back(CastInst::CreatePointerCast(op,
-								PointerType::get(IntegerType::get(module->getContext(), 8), 0),"",callInst));
-					        Instruction *freeCallInst = CallInst::Create(freeHookFunction,freeArgList);
-					        callInst->insertAfter(freeCallInst);
+						Type *pTy = PointerType::get(IntegerType::get(module->getContext(),8),0);
+						freeArgList.push_back(ConstantExpr::getIntToPtr(dyn_cast<Constant>(op), pTy));
+					       // freeArgList.push_back(CastInst::CreatePointerCast(op,
+					        //		PointerType::get(IntegerType::get(module->getContext(), 8), 0),"Ari",inst));
+					        //Instruction *freeCallInst = CallInst::Create(freeHookFunction,freeArgList);
+					        //callInst->insertAfter(freeCallInst);
 					}
 			        }
 				errs()<<"\n\n\n";
