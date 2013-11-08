@@ -32,7 +32,7 @@ namespace {
 				Instruction *inst = &*I;
 				CallInst *callInst = static_cast<CallInst*>(inst);
 				Function *targetFunction = callInst->getCalledFunction();
-				if(targetFunction->getName() == "malloc") {
+				if(targetFunction && targetFunction->getName() == "malloc") {
 					ConstantInt*size = dyn_cast<ConstantInt>(callInst->getArgOperand(0));
 					Constant* mallocHook = module->getOrInsertFunction("malloc_hook",
 							Type::getVoidTy(module->getContext()),
@@ -50,7 +50,7 @@ namespace {
 					argList.push_back(static_cast<Value*>(size));
 					Instruction *mallocCallInst = CallInst::Create(mallocHookFunction,argList);
 					mallocCallInst->insertBefore(ii);
-				}else if(targetFunction->getName() == "free") {
+				}else if(targetFunction && targetFunction->getName() == "free") {
 					Value *op = callInst->getArgOperand(0);
 					Constant* freeHook = module->getOrInsertFunction("free_hook",
 							Type::getVoidTy(module->getContext()),
