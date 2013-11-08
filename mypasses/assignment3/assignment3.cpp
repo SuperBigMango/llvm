@@ -43,12 +43,13 @@ namespace {
 					Function* mallocHookFunction = cast<Function>(mallocHook);
 					vector<Value*> argList;
 					Instruction *ii = &*(++I);
+					--I;
 					argList.push_back(CastInst::CreatePointerCast(callInst,
 								PointerType::get(IntegerType::get(module->getContext(), 8), 0),
 								"mallocHookCast",ii));
 					argList.push_back(static_cast<Value*>(size));
-					Instruction *callInst = CallInst::Create(mallocHookFunction,argList);
-					callInst->insertAfter(inst);
+					Instruction *mallocCallInst = CallInst::Create(mallocHookFunction,argList);
+					mallocCallInst->insertBefore(ii);
 				}else if(targetFunction->getName() == "free") {
 					Value *op = callInst->getArgOperand(0);
 					Constant* freeHook = module->getOrInsertFunction("free_hook",
@@ -65,7 +66,6 @@ namespace {
 					freeCallInst->insertBefore(inst);
 				}
 			}
-			errs()<<"\n\n\n";
 		}
 		return true;
 	}
