@@ -26,14 +26,21 @@ namespace {
 	}
 
 	bool Ass3::runOnFunction(Function &func) {
+		if(func.getName() == "malloc_hook" || func.getName() == "free_hook") {
+			return true;
+		}
+
 		Module *module = func.getParent();
 		for(inst_iterator I = inst_begin(func), E = inst_end(func); I != E ; ++I ) {
 			if(isa<CallInst>(*I)){
+				if(func.getName() == "jpeg_get_small")  {
+					bool deb = true;
+				}
 				Instruction *inst = &*I;
 				CallInst *callInst = static_cast<CallInst*>(inst);
 				Function *targetFunction = callInst->getCalledFunction();
 				if(targetFunction && targetFunction->getName() == "malloc") {
-					ConstantInt*size = dyn_cast<ConstantInt>(callInst->getArgOperand(0));
+					Value  *size = callInst->getArgOperand(0);
 					Constant* mallocHook = module->getOrInsertFunction("malloc_hook",
 							Type::getVoidTy(module->getContext()),
 							PointerType::get(IntegerType::get(module->getContext(), 8), 0),
@@ -47,7 +54,8 @@ namespace {
 					argList.push_back(CastInst::CreatePointerCast(callInst,
 								PointerType::get(IntegerType::get(module->getContext(), 8), 0),
 								"mallocHookCast",ii));
-					argList.push_back(static_cast<Value*>(size));
+					//argList.push_back(static_cast<Value*>(size));
+					argList.push_back(size);
 					Instruction *mallocCallInst = CallInst::Create(mallocHookFunction,argList);
 					mallocCallInst->insertBefore(ii);
 				}else if(targetFunction && targetFunction->getName() == "free") {
