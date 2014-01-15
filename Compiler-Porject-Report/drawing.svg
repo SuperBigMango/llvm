@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective5425" />
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path4032"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path4026"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="260.88065"
+     inkscape:cy="806.56603"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1004"
+     inkscape:window-x="1920"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-global="false" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:0.39479178px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect2985"
+       width="21.27113"
+       height="18.572533"
+       x="216.6534"
+       y="144.97632"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <rect
+       style="fill:#999999"
+       id="rect2987"
+       width="56.266235"
+       height="23.717186"
+       x="199.82739"
+       y="178.0304"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <rect
+       style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:0.5363006px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect2985-0"
+       width="32.528484"
+       height="22.411867"
+       x="212.91246"
+       y="237.11983"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <text
+       xml:space="preserve"
+       style="font-size:21.66903687px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="238.96027"
+       y="145.97385"
+       id="text3007"
+       sodipodi:linespacing="125%"
+       transform="scale(0.92167664,1.0849792)"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170"><tspan
+         sodipodi:role="line"
+         id="tspan3009"
+         x="238.96027"
+         y="145.97385"
+         style="font-size:14.34139633px">IR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8.70521927px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="301.89957"
+       y="182.22636"
+       id="text3007-6"
+       sodipodi:linespacing="125%"
+       transform="scale(0.72091197,1.3871319)"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170"><tspan
+         sodipodi:role="line"
+         id="tspan3009-0"
+         x="301.89957"
+         y="182.22636">Inst_IR</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11.27558994px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="204.23483"
+       y="192.97278"
+       id="text3032"
+       sodipodi:linespacing="125%"
+       transform="scale(0.99211307,1.0079496)"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170"><tspan
+         sodipodi:role="line"
+         id="tspan3034"
+         x="204.23483"
+         y="192.97278">Inst_pass</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.21407497px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 227.46401,163.54885 0.27297,14.48155"
+       id="path3055"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#rect2985"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#rect2987"
+       inkscape:connection-end-point="d4"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.21407497px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 228.20731,201.74758 0.73617,35.37225"
+       id="path3057"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#rect2987"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#rect2985-0"
+       inkscape:connection-end-point="d4"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#916f6f"
+       id="path3059"
+       sodipodi:cx="176.42857"
+       sodipodi:cy="174.50504"
+       sodipodi:rx="16.428572"
+       sodipodi:ry="18.571428"
+       d="m 192.85715,174.50504 a 16.428572,18.571428 0 1 1 -32.85715,0 16.428572,18.571428 0 1 1 32.85715,0 z"
+       transform="matrix(0.93222167,0,0,0.79057273,120.25561,111.22301)"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.56890011px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="364.30795"
+       y="198.70433"
+       id="text3063"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170"
+       transform="scale(0.76784521,1.3023458)"><tspan
+         sodipodi:role="line"
+         id="tspan3065"
+         x="364.30795"
+         y="198.70433">lli</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.21407497px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:none;marker-end:url(#Arrow1Mend)"
+       d="m 245.44094,248.57644 23.97208,0.36947"
+       id="path3069"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#rect2985-0"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#path3059"
+       inkscape:connection-end-point="d4"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <rect
+       style="fill:#c8beb7"
+       id="rect5019"
+       width="27.96665"
+       height="16.376148"
+       x="269.41107"
+       y="199.4888"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.70284748px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="286.55344"
+       y="203.40114"
+       id="text5027"
+       sodipodi:linespacing="125%"
+       transform="scale(0.96635854,1.0348126)"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170"><tspan
+         sodipodi:role="line"
+         id="tspan5029"
+         x="286.55344"
+         y="203.40114">I/P</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.21407497px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 283.65712,215.86495 0.59815,18.64172"
+       id="path5031"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#rect5019"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#path3059"
+       inkscape:connection-end-point="d4"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <rect
+       style="fill:#eeffaa;fill-rule:evenodd;stroke:#000000;stroke-width:0.52948052px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect2985-6"
+       width="33.486355"
+       height="21.220598"
+       x="311.59763"
+       y="244.2186"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.07700253px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="421.99365"
+       y="192.56462"
+       id="text5235"
+       sodipodi:linespacing="125%"
+       transform="scale(0.74600415,1.3404751)"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170"><tspan
+         sodipodi:role="line"
+         id="tspan5237"
+         x="421.99365"
+         y="192.56462">trc_dmp</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.21407497px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 299.9052,251.14723 11.69243,1.51386"
+       id="path5239"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#path3059"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#rect2985-6"
+       inkscape:connection-end-point="d4"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <rect
+       style="fill:#cccccc"
+       id="rect5441"
+       width="37.621803"
+       height="32.187607"
+       x="309.69638"
+       y="189.3243"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <text
+       xml:space="preserve"
+       style="font-size:9.53881168px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="427.3367"
+       y="154.20091"
+       id="text5443"
+       sodipodi:linespacing="125%"
+       transform="scale(0.73513923,1.3602865)"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170"><tspan
+         sodipodi:role="line"
+         id="tspan5445"
+         x="427.3367"
+         y="154.20091">gen_prf</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.21407497px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 328.37655,244.2186 0.0765,-22.7067"
+       id="path5447"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#rect2985-6"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#rect5441"
+       inkscape:connection-end-point="d4"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <rect
+       style="fill:#999999"
+       id="rect2987-7"
+       width="56.266235"
+       height="23.717186"
+       x="299.57092"
+       y="142.63541"
+       inkscape:export-filename="/home/ari/git/Report/design.png"
+       inkscape:export-xdpi="170"
+       inkscape:export-ydpi="170" />
+    <text
+       xml:space="preserve"
+       style="font-size:11.79737091px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="322.75311"
+       y="150.22896"
+       id="text5659"
+       sodipodi:linespacing="125%"
+       transform="scale(0.9482334,1.0545927)"><tspan
+         sodipodi:role="line"
+         id="tspan5661"
+         x="322.75311"
+         y="150.22896">Dyn_CG</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.21407497px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 328.25343,189.3243 -0.36234,-22.97171"
+       id="path5663"
+       inkscape:connector-type="polyline"
+       inkscape:connector-curvature="3"
+       inkscape:connection-start="#rect5441"
+       inkscape:connection-start-point="d4"
+       inkscape:connection-end="#rect2987-7"
+       inkscape:connection-end-point="d4" />
+  </g>
+</svg>
